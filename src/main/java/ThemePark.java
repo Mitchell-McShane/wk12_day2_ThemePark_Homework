@@ -1,15 +1,46 @@
+import attractions.Attraction;
 import behaviours.IReviewed;
+import people.Visitor;
+import stalls.Stall;
 
 import java.util.ArrayList;
 
 public class ThemePark {
-    ArrayList<IReviewed> iReviewed;
 
-    public ThemePark(ArrayList<IReviewed> iReviewed){
-        this.iReviewed = iReviewed;
+    ArrayList<Attraction> attractions;
+    ArrayList<Stall> stalls;
+
+
+    public ThemePark(){
+        this.attractions = new ArrayList<>();
+        this.stalls = new ArrayList<>();
+    }
+
+    public void add(Attraction attraction){
+        attractions.add(attraction);
+    }
+
+    public int countAttractions(){
+        return attractions.size();
+    }
+
+    public void add(Stall stall){
+        stalls.add(stall);
+    }
+
+    public int countStalls(){
+        return stalls.size();
     }
 
     public ArrayList<IReviewed> getAllReviewed(){
-        return iReviewed;
+        ArrayList<IReviewed> allReviewed = new ArrayList<>();
+        allReviewed.addAll(attractions);
+        allReviewed.addAll(stalls);
+        return allReviewed;
+    }
+
+    public void visit(Visitor visitor, Attraction attraction){
+        attraction.visitCounter();
+        visitor.addVisitedAttraction(attraction);
     }
 }
